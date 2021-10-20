@@ -1,6 +1,7 @@
 package com.mb.service.impl;
 
 import com.mb.dto.AvailableSeatsForScreening;
+import com.mb.dto.ReserveDto;
 import com.mb.dto.SeatDto;
 import com.mb.models.Reservation;
 import com.mb.models.Screening;
@@ -46,16 +47,16 @@ public class SeatServiceImpl implements SeatService {
 
 	@Override
 	@Transactional
-	public String bookSeat(final String screeningId, final String seat, final String username) {
+	public String bookSeat(final String screeningId, final ReserveDto reservation) {
 		final Screening screening = screeningRepo.findById(screeningId)
 				.orElseThrow(NotFoundException::new);
 
 		Set<Seat> availableSeats = getAvailableSeats(screening);
 
-		if(isSeatAvailable(availableSeats, seat)){
+		if(isSeatAvailable(availableSeats, reservation.getSeat())){
 			Reservation res = new Reservation();
 			res.setReserved(true);
-			res.setUsername(username);
+			res.setUsername(reservation.getUsername());
 			res.setScreening(screening);
 
 			reservationRepo.save(res);
@@ -63,7 +64,7 @@ public class SeatServiceImpl implements SeatService {
 			SeatReserved sres = new SeatReserved();
 			sres.setReservation(res);
 			sres.setScreening(screening);
-			sres.setSeat(getSeat(availableSeats, seat).get());
+			sres.setSeat(getSeat(availableSeats, reservation.getSeat()).get());
 
 			seatReservedRepo.save(sres);
 

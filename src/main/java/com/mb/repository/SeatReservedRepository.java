@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.mb.models.SeatReserved;
 
 @Repository
-public interface SeatReservedRepository extends JpaRepository<SeatReserved, Long> {
+public interface SeatReservedRepository extends JpaRepository<SeatReserved, String> {
 
 }

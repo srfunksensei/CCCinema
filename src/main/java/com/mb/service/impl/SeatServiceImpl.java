@@ -33,7 +33,7 @@ public class SeatServiceImpl implements SeatService {
 	private final SeatReservedRepository seatReservedRepo;
 
 	@Override
-	public AvailableSeatsForScreening getSeats(long screeningId) {
+	public AvailableSeatsForScreening getSeats(final String screeningId) {
 		final Screening screening = screeningRepo.findById(screeningId)
 				.orElseThrow(NotFoundException::new);
 
@@ -46,7 +46,7 @@ public class SeatServiceImpl implements SeatService {
 
 	@Override
 	@Transactional
-	public String bookSeat(long screeningId, String seat, String username) {
+	public String bookSeat(final String screeningId, final String seat, final String username) {
 		final Screening screening = screeningRepo.findById(screeningId)
 				.orElseThrow(NotFoundException::new);
 

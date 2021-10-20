@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.mb.models.Screening;
 
 @Repository
-public interface ScreeningRepository extends JpaRepository<Screening, Long> {
+public interface ScreeningRepository extends JpaRepository<Screening, String> {
 
 	List<Screening> findByStartAfter(Date start);
 }

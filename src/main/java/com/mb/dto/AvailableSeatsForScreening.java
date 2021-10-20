@@ -13,6 +13,6 @@ import java.util.List;
 @EqualsAndHashCode
 public class AvailableSeatsForScreening {
 	
-	private long screeningId;
+	private String screeningId;
 	private List<SeatDto> availableSeats;
 }

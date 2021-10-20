@@ -32,13 +32,13 @@ public class Cinema {
 	// A way for the user to book a seat of their choice for a selected movie.
 	@RequestMapping(value = "/{screening_id}/seats", method = RequestMethod.GET)
 	@ResponseBody
-	public AvailableSeatsForScreening getSeatsForScreening(@PathVariable("screening_id") long screeningId){
+	public AvailableSeatsForScreening getSeatsForScreening(@PathVariable("screening_id") final String screeningId){
 		return seatService.getSeats(screeningId);
 	}
 	
 	@RequestMapping(value = "/{screening_id}/{seat}", method = RequestMethod.POST)
 	@ResponseBody
-	public String bookSeat(@PathVariable("screening_id") Long screeningId, @PathVariable("seat") String seat, @RequestBody String username){
+	public String bookSeat(@PathVariable("screening_id") final String screeningId, @PathVariable("seat") String seat, @RequestBody String username){
 		return seatService.bookSeat(screeningId, seat, username);
 	}
 }

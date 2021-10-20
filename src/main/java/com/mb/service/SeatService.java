@@ -4,8 +4,8 @@ import com.mb.dto.AvailableSeatsForScreening;
 
 public interface SeatService {
 	
-	AvailableSeatsForScreening getSeats(long screeningId);
+	AvailableSeatsForScreening getSeats(final String screeningId);
 	
-	String bookSeat(long screeningId, String seat, String username);
+	String bookSeat(final String screeningId, final String seat, final String username);
 
 }

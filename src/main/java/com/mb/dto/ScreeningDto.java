@@ -18,6 +18,6 @@ public class ScreeningDto {
 	private String description;
 	private int duration;
 	private String auditorium;
-	private long screeningId;
+	private String screeningId;
 	private Date start;
 }

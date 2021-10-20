@@ -1,29 +1,21 @@
 package com.mb.controllers;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.mb.dto.AvailableSeatsForScreening;
 import com.mb.dto.ScreeningDto;
 import com.mb.service.ScreeningService;
 import com.mb.service.SeatService;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class Cinema {
 
-	@Autowired
-	private ScreeningService screeningService;
-	
-	@Autowired
-	private SeatService seatService;
+	private final ScreeningService screeningService;
+	private final SeatService seatService;
 	
 	@RequestMapping("/")
 	public String index() {

@@ -1,24 +1,16 @@
 package com.mb.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class SeatDto {
 
 	private String row;
-
 	private int num;
-
-	public String getRow() {
-		return row;
-	}
-
-	public void setRow(String row) {
-		this.row = row;
-	}
-
-	public int getNum() {
-		return num;
-	}
-
-	public void setNum(int num) {
-		this.num = num;
-	}
 }

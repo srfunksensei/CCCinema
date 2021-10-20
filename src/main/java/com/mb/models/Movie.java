@@ -1,5 +1,8 @@
 package com.mb.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,6 +15,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "MOVIE")
+@Getter
+@Setter
 public class Movie {
 	
 	@Id
@@ -31,59 +36,4 @@ public class Movie {
 	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	private Set<Screening> screenings;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDirector() {
-		return director;
-	}
-
-	public void setDirector(String director) {
-		this.director = director;
-	}
-
-	public String getCast() {
-		return cast;
-	}
-
-	public void setCast(String cast) {
-		this.cast = cast;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getDuration() {
-		return duration;
-	}
-
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-
-	public Set<Screening> getScreenings() {
-		return screenings;
-	}
-
-	public void setScreenings(Set<Screening> screenings) {
-		this.screenings = screenings;
-	}
 }

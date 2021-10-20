@@ -1,5 +1,8 @@
 package com.mb.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +17,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "SEAT")
+@Getter
+@Setter
 public class Seat {
 	
 	@Id
@@ -31,43 +36,4 @@ public class Seat {
 	@OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
 	private Set<SeatReserved> seatsReserved;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getRow() {
-		return row;
-	}
-
-	public void setRow(String row) {
-		this.row = row;
-	}
-
-	public int getNum() {
-		return num;
-	}
-
-	public void setNum(int num) {
-		this.num = num;
-	}
-
-	public Auditorium getAuditorium() {
-		return auditorium;
-	}
-
-	public void setAuditorium(Auditorium auditorium) {
-		this.auditorium = auditorium;
-	}
-
-	public Set<SeatReserved> getSeatsReserved() {
-		return seatsReserved;
-	}
-
-	public void setSeatsReserved(Set<SeatReserved> seatsReserved) {
-		this.seatsReserved = seatsReserved;
-	}
 }

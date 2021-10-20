@@ -1,5 +1,8 @@
 package com.mb.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -17,6 +20,8 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "SCREENING", 
 		uniqueConstraints = @UniqueConstraint(columnNames = { "movie_id", "auditorium_id", "start" }))
+@Getter
+@Setter
 public class Screening {
 
 	@Id
@@ -38,52 +43,4 @@ public class Screening {
 
 	@OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
 	private Set<SeatReserved> seatsReserved;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Date getStart() {
-		return start;
-	}
-
-	public void setStart(Date start) {
-		this.start = start;
-	}
-
-	public Movie getMovie() {
-		return movie;
-	}
-
-	public void setMovie(Movie movie) {
-		this.movie = movie;
-	}
-
-	public Auditorium getAuditorium() {
-		return auditorium;
-	}
-
-	public void setAuditorium(Auditorium auditorium) {
-		this.auditorium = auditorium;
-	}
-
-	public Set<Reservation> getReservations() {
-		return reservations;
-	}
-
-	public void setReservations(Set<Reservation> reservations) {
-		this.reservations = reservations;
-	}
-
-	public Set<SeatReserved> getSeatsReserved() {
-		return seatsReserved;
-	}
-
-	public void setSeatsReserved(Set<SeatReserved> seatsReserved) {
-		this.seatsReserved = seatsReserved;
-	}
 }

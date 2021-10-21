@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
@@ -19,5 +19,5 @@ public class ScreeningDto {
 	private int duration;
 	private String auditorium;
 	private String screeningId;
-	private Date start;
+	private Timestamp start;
 }

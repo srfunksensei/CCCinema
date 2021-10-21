@@ -4,10 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Date;
-import java.util.Set;
-
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "SCREENING", 
@@ -22,7 +21,7 @@ public class Screening {
 	@Column(name = "id")
 	private String id;
 
-	private Date start;
+	private Timestamp start;
 
 	@ManyToOne
 	@JoinColumn(name = "movie_id")

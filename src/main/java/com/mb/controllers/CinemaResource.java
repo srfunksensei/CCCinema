@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -26,7 +26,7 @@ public class CinemaResource {
 
 	@GetMapping(value = "/upcoming")
 	public ResponseEntity<List<ScreeningDto>> getUpcomingMovies() {
-		return ResponseEntity.ok(screeningService.getUpcoming(new Date()));
+		return ResponseEntity.ok(screeningService.getUpcoming(new Timestamp(System.currentTimeMillis())));
 	}
 	
 	@GetMapping(value = "/{screening_id}/seats")

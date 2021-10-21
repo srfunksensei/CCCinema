@@ -1,15 +1,14 @@
 package com.mb.repository;
 
-import java.util.Date;
-import java.util.List;
-
+import com.mb.models.Screening;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mb.models.Screening;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Repository
 public interface ScreeningRepository extends JpaRepository<Screening, String> {
 
-	List<Screening> findByStartAfter(Date start);
+	List<Screening> findByStartAfter(final Timestamp start);
 }

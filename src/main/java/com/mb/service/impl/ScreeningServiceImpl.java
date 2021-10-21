@@ -11,7 +11,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -40,7 +40,7 @@ public class ScreeningServiceImpl implements ScreeningService {
 
 
 	@Override
-	public List<ScreeningDto> getUpcoming(Date from) {
+	public List<ScreeningDto> getUpcoming(final Timestamp from) {
 		Type listType = new TypeToken<List<ScreeningDto>>() {}.getType();
 		return MAPPER.map(screeningRepo.findByStartAfter(from), listType);
 	}

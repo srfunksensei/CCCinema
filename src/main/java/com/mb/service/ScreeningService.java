@@ -1,11 +1,11 @@
 package com.mb.service;
 
-import java.util.Date;
-import java.util.List;
-
 import com.mb.dto.ScreeningDto;
+
+import java.sql.Timestamp;
+import java.util.List;
 
 public interface ScreeningService {
 
-	List<ScreeningDto> getUpcoming(Date from);
+	List<ScreeningDto> getUpcoming(final Timestamp from);
 }

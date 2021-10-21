@@ -54,17 +54,19 @@ public class SeatServiceImpl implements SeatService {
 		Set<Seat> availableSeats = getAvailableSeats(screening);
 
 		if(isSeatAvailable(availableSeats, reservation.getSeat())){
-			Reservation res = new Reservation();
-			res.setReserved(true);
-			res.setUsername(reservation.getUsername());
-			res.setScreening(screening);
+			final Reservation res = Reservation.builder()
+					.reserved(true)
+					.username(reservation.getUsername())
+					.screening(screening)
+					.build();
 
 			reservationRepo.save(res);
 
-			SeatReserved sres = new SeatReserved();
-			sres.setReservation(res);
-			sres.setScreening(screening);
-			sres.setSeat(getSeat(availableSeats, reservation.getSeat()).get());
+			final SeatReserved sres = SeatReserved.builder()
+					.reservation(res)
+					.screening(screening)
+					.seat(getSeat(availableSeats, reservation.getSeat()).get())
+					.build();
 
 			seatReservedRepo.save(sres);
 

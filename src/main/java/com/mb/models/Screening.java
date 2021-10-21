@@ -12,7 +12,6 @@ import java.util.Set;
 @Table(name = "SCREENING", 
 		uniqueConstraints = @UniqueConstraint(columnNames = { "movie_id", "auditorium_id", "start" }))
 @Getter
-@Setter
 public class Screening {
 
 	@Id

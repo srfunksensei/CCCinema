@@ -1,5 +1,6 @@
 package com.mb.models;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "RESERVATION")
 @Getter
-@Setter
+@Builder
 public class Reservation {
 
 	@Id

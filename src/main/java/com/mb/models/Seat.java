@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "SEAT")
 @Getter
-@Setter
 public class Seat {
 
 	@Id

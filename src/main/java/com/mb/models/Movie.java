@@ -1,12 +1,12 @@
 package com.mb.models;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Set;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "MOVIE")
@@ -18,17 +18,22 @@ public class Movie {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name = "id")
 	private String id;
-	
+
+	@NotBlank
 	private String title;
-	
+
+	@NotBlank
 	private String director;
-	
+
+	@NotBlank
 	private String cast;
-	
+
+	@NotBlank
 	private String description;
 	
 	private int duration;
-	
+
+	@NotNull
 	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	private Set<Screening> screenings;
 

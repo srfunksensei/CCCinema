@@ -2,10 +2,10 @@ package com.mb.models;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "SEAT_RESERVED")
@@ -17,17 +17,20 @@ public class SeatReserved {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name = "id")
-	private String id;
-	
+	private final String id;
+
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "seat_id")
-	private Seat seat;
-	
+	private final Seat seat;
+
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "reservation_id")
-	private Reservation reservation;
-	
+	private final Reservation reservation;
+
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "screening_id")
-	private Screening screening;
+	private final Screening screening;
 }

@@ -2,12 +2,12 @@ package com.mb.models;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Set;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "RESERVATION")
@@ -19,19 +19,22 @@ public class Reservation {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name = "id")
-	private String id;
-	
-	private String username;
-	
-	private boolean reserved;
-	
-	private boolean paid;
+	private final String id;
 
-	@OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
-	private Set<SeatReserved> seatsReserved;
+	@NotBlank
+	private final String username;
 	
+	private final boolean reserved;
+	
+	private final boolean paid;
+
+	@NotNull
+	@OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
+	private final Set<SeatReserved> seatsReserved;
+
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "screening_id")
-	private Screening screening;
+	private final Screening screening;
 	
 }

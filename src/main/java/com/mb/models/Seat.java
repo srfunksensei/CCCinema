@@ -20,9 +20,11 @@ public class Seat {
 	private String id;
 
 	@NotBlank
+	@Column(name = "line")
 	private String row;
-	
-	private int num;
+
+	@NotBlank
+	private String num;
 
 	@NotNull
 	@ManyToOne

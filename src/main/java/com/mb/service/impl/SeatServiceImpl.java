@@ -82,9 +82,9 @@ public class SeatServiceImpl implements SeatService {
 	
 	private Optional<Seat> getSeat(Set<Seat> availableSeats, String seat) {
 		String row = seat.substring(0, 1);
-		int num = Integer.parseInt(seat.substring(1));
+		String num = seat.substring(1);
 		
-		return availableSeats.stream().filter(p -> p.getNum() == num && p.getRow().equalsIgnoreCase(row)).findAny();
+		return availableSeats.stream().filter(p -> p.getNum().equals(num) && p.getRow().equalsIgnoreCase(row)).findAny();
 	}
 
 	private Set<Seat> getAvailableSeats(Screening screening) {

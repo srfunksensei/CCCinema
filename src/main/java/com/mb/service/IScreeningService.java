@@ -5,7 +5,7 @@ import com.mb.dto.ScreeningDto;
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface ScreeningService {
+public interface IScreeningService {
 
 	List<ScreeningDto> getUpcoming(final Timestamp from);
 }

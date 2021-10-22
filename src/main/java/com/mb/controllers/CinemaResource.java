@@ -3,7 +3,7 @@ package com.mb.controllers;
 import com.mb.dto.AvailableSeatsForScreening;
 import com.mb.dto.ReserveDto;
 import com.mb.dto.ScreeningDto;
-import com.mb.service.ScreeningService;
+import com.mb.service.IScreeningService;
 import com.mb.service.SeatService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CinemaResource {
 
-	private final ScreeningService screeningService;
+	private final IScreeningService screeningService;
 	private final SeatService seatService;
 	
 	@GetMapping("/")

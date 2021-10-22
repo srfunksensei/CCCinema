@@ -31,4 +31,13 @@ public class Auditorium {
 	@NotNull
 	@OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL)
 	private Set<Seat> seats;
+
+	public boolean addScreening(@NotNull final Screening screening) {
+		return screenings.add(screening);
+	}
+
+	public boolean addSeats(@NotNull final Set<Seat> seats) {
+		seatsNum += seats.size();
+		return this.seats.addAll(seats);
+	}
 }

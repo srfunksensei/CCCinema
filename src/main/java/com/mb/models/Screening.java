@@ -1,6 +1,7 @@
 package com.mb.models;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Screening {
 	@Column(name = "id")
 	private String id;
 
-	@NotNull
+	@Setter
 	private Timestamp start;
 
 	@NotNull
@@ -28,7 +29,7 @@ public class Screening {
 	@JoinColumn(name = "movie_id")
 	private Movie movie;
 
-	@NotNull
+	@Setter
 	@ManyToOne
 	@JoinColumn(name = "auditorium_id")
 	private Auditorium auditorium;

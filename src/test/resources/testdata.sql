@@ -1,3 +1,8 @@
+DELETE FROM screening;
+DELETE FROM seat;
+DELETE FROM auditorium;
+DELETE FROM movie;
+
 INSERT INTO movie(id, `cast`, description, director, duration, title) VALUES ('7cf56ebc-5a4d-4cbe-a372-057783e5c545', ' Mark Hamill, Harrison Ford, Carrie Fisher ', 'Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the galaxy from the Empire''s world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.', 'George Lucas', 121, 'Star Wars: Episode IV - A New Hope');
 INSERT INTO movie(id, `cast`, description, director, duration, title) VALUES ('7cf56ebc-5a4d-4cbe-a372-057783e5c546', ' Mark Hamill, Harrison Ford, Carrie Fisher ', 'After the rebels have been brutally overpowered by the Empire on their newly established base, Luke Skywalker takes advanced Jedi training with Master Yoda, while his friends are pursued by Darth Vader as part of his plan to capture Luke.', 'George Lucas', 124, 'Star Wars: Episode V - The Empire Strikes Back');
 INSERT INTO movie(id, `cast`, description, director, duration, title) VALUES ('7cf56ebc-5a4d-4cbe-a372-057783e5c547', ' Mark Hamill, Harrison Ford, Carrie Fisher ', 'After rescuing Han Solo from the palace of Jabba the Hutt, the rebels attempt to destroy the second Death Star, while Luke struggles to make Vader return from the dark side of the Force.', 'George Lucas', 131, 'Star Wars: Episode VI - Return of the Jedi');
@@ -46,3 +51,5 @@ INSERT INTO screening(id, `start`, auditorium_id, movie_id) VALUES ('7cf56ebc-5a
 INSERT INTO screening(id, `start`, auditorium_id, movie_id) VALUES ('7cf56ebc-5a4d-4cbe-a372-057783e5c570', TIMESTAMPADD('HOUR', 28, CURRENT_DATE), '7cf56ebc-5a4d-4cbe-a372-057783e5c549', '7cf56ebc-5a4d-4cbe-a372-057783e5c547');
 INSERT INTO screening(id, `start`, auditorium_id, movie_id) VALUES ('7cf56ebc-5a4d-4cbe-a372-057783e5c571', TIMESTAMPADD('HOUR', 32, CURRENT_DATE), '7cf56ebc-5a4d-4cbe-a372-057783e5c549', '7cf56ebc-5a4d-4cbe-a372-057783e5c545');
 INSERT INTO screening(id, `start`, auditorium_id, movie_id) VALUES ('7cf56ebc-5a4d-4cbe-a372-057783e5c572', TIMESTAMPADD('HOUR', 36, CURRENT_DATE), '7cf56ebc-5a4d-4cbe-a372-057783e5c549', '7cf56ebc-5a4d-4cbe-a372-057783e5c546');
+
+

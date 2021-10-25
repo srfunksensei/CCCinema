@@ -1,5 +1,6 @@
 package com.mb.service;
 
+import com.mb.converter.ModelMapperConverter;
 import com.mb.dto.ScreeningDto;
 import com.mb.models.Screening;
 import com.mb.repository.ScreeningRepository;
@@ -7,12 +8,7 @@ import com.mb.service.impl.ScreeningServiceModelMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -25,11 +21,13 @@ public class ScreeningServiceModelMapperUnitTest {
 
     private IScreeningService underTest;
     private ScreeningRepository screeningRepository;
+    private ModelMapperConverter modelMapperConverter;
 
     @BeforeEach
     public void setUp() {
         screeningRepository = Mockito.mock(ScreeningRepository.class);
-        underTest = new ScreeningServiceModelMapper(screeningRepository);
+        modelMapperConverter = Mockito.mock(ModelMapperConverter.class);
+        underTest = new ScreeningServiceModelMapper(screeningRepository, modelMapperConverter);
     }
 
     @Test

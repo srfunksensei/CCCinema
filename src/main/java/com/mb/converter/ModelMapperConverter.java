@@ -5,11 +5,10 @@ import com.mb.models.Screening;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
-import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Type;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @NoArgsConstructor
@@ -30,12 +29,14 @@ public class ModelMapperConverter {
         MAPPER.addMappings(SCREENING_MAP);
     }
 
-    public List<ScreeningDto> toDto(final List<Screening> screenings) {
-        final Type listType = new TypeToken<List<ScreeningDto>>() {}.getType();
-        return MAPPER.map(screenings, listType);
+    public <S, T> T toDto(final S source, final Class<T> targetClass) {
+        return MAPPER.map(source, targetClass);
     }
 
-    public ScreeningDto toDto(final Screening screening) {
-        return MAPPER.map(screening, ScreeningDto.class);
+    public <S, T> List<T> toDto(final List<S> source, final Class<T> targetClass) {
+        return source
+                .stream()
+                .map(element -> toDto(element, targetClass))
+                .collect(Collectors.toList());
     }
 }

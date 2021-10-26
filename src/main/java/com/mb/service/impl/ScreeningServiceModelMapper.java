@@ -1,6 +1,6 @@
 package com.mb.service.impl;
 
-import com.mb.converter.ModelMapperConverter;
+import com.mb.converter.modelmapper.ModelMapperConverter;
 import com.mb.dto.ScreeningDto;
 import com.mb.repository.ScreeningRepository;
 import com.mb.service.IScreeningService;
@@ -19,6 +19,6 @@ public class ScreeningServiceModelMapper implements IScreeningService {
 
 	@Override
 	public List<ScreeningDto> getUpcoming(final Timestamp from) {
-		return converter.toDto(screeningRepo.findByStartAfter(from));
+		return converter.toDto(screeningRepo.findByStartAfter(from), ScreeningDto.class);
 	}
 }

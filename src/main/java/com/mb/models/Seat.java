@@ -1,6 +1,6 @@
 package com.mb.models;
 
-import lombok.Getter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,6 +11,9 @@ import java.util.Set;
 @Entity
 @Table(name = "SEAT")
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Seat {
 
 	@Id
@@ -26,6 +29,7 @@ public class Seat {
 	@NotBlank
 	private String num;
 
+	@Setter
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "auditorium_id")

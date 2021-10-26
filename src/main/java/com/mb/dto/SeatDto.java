@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class SeatDto {
 
+	private String auditorium;
 	private String row;
-	private int num;
+	private String num;
+	private boolean reserved;
 }

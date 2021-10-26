@@ -1,7 +1,9 @@
 package com.mb.converter;
 
 import com.mb.dto.ScreeningDto;
+import com.mb.dto.SeatDto;
 import com.mb.models.Screening;
+import com.mb.models.Seat;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -25,8 +27,16 @@ public class ModelMapperConverter {
             map().setScreeningId(source.getId());
         }
     };
+    private static final PropertyMap<Seat, SeatDto> SEAT_MAP = new PropertyMap<Seat, SeatDto>() {
+        protected void configure() {
+            map().setAuditorium(source.getAuditorium().getName());
+            map().setNum(source.getNum());
+            map().setRow(source.getRow());
+        }
+    };
     static {
         MAPPER.addMappings(SCREENING_MAP);
+        MAPPER.addMappings(SEAT_MAP);
     }
 
     public <S, T> T toDto(final S source, final Class<T> targetClass) {

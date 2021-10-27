@@ -1,6 +1,6 @@
 package com.mb.service;
 
-import com.mb.converter.ModelMapperConverter;
+import com.mb.converter.modelmapper.ScreeningModelMapperConverter;
 import com.mb.dto.ScreeningDto;
 import com.mb.models.Screening;
 import com.mb.repository.ScreeningRepository;
@@ -21,13 +21,13 @@ public class ScreeningServiceModelMapperUnitTest {
 
     private IScreeningService underTest;
     private ScreeningRepository screeningRepository;
-    private ModelMapperConverter modelMapperConverter;
+    private ScreeningModelMapperConverter screeningModelMapperConverter;
 
     @BeforeEach
     public void setUp() {
         screeningRepository = Mockito.mock(ScreeningRepository.class);
-        modelMapperConverter = Mockito.mock(ModelMapperConverter.class);
-        underTest = new ScreeningServiceModelMapper(screeningRepository, modelMapperConverter);
+        screeningModelMapperConverter = Mockito.mock(ScreeningModelMapperConverter.class);
+        underTest = new ScreeningServiceModelMapper(screeningRepository, screeningModelMapperConverter);
     }
 
     @Test

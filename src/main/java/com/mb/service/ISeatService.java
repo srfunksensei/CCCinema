@@ -1,12 +1,13 @@
 package com.mb.service;
 
-import com.mb.dto.AvailableSeatsForScreening;
+import com.mb.dto.ScreeningSeats;
 import com.mb.dto.ReserveDto;
+import com.mb.dto.SeatReservationResultDto;
 
-public interface SeatService {
+public interface ISeatService {
 	
-	AvailableSeatsForScreening getSeats(final String screeningId);
+	ScreeningSeats getSeats(final String screeningId);
 	
-	String bookSeat(final String screeningId, final ReserveDto reservation);
+	SeatReservationResultDto bookSeat(final String screeningId, final ReserveDto reservation);
 
 }

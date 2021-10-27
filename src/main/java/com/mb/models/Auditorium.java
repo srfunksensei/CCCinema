@@ -9,6 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -32,11 +34,15 @@ public class Auditorium {
 
 	@NotNull
 	@OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL)
-	private Set<Screening> screenings;
+	private final Set<Screening> screenings = new HashSet<>();
 
 	@NotNull
 	@OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL)
-	private Set<Seat> seats;
+	private final Set<Seat> seats = new HashSet<>();
+
+	public Set<Seat> getSeats() {
+		return Collections.unmodifiableSet(seats);
+	}
 
 	public boolean addScreening(@NotNull final Screening screening) {
 		return screenings.add(screening);

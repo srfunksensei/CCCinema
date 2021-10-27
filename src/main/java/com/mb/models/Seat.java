@@ -6,6 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -37,6 +39,13 @@ public class Seat {
 
 	@NotNull
 	@OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
-	private Set<SeatReserved> seatsReserved;
+	private final Set<SeatReserved> seatsReserved = new HashSet<>();
 
+	public Set<SeatReserved> getSeatsReserved() {
+		return Collections.unmodifiableSet(seatsReserved);
+	}
+
+	public boolean addSeatReserved(final SeatReserved seatReserved) {
+		return seatsReserved.add(seatReserved);
+	}
 }

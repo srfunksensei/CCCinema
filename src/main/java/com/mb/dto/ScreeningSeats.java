@@ -5,14 +5,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class AvailableSeatsForScreening {
+public class ScreeningSeats {
 	
 	private String screeningId;
-	private List<SeatDto> availableSeats;
+	private Set<SeatDto> seats;
 }

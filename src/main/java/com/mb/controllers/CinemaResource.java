@@ -1,10 +1,11 @@
 package com.mb.controllers;
 
-import com.mb.dto.AvailableSeatsForScreening;
+import com.mb.dto.ScreeningSeats;
 import com.mb.dto.ReserveDto;
 import com.mb.dto.ScreeningDto;
+import com.mb.dto.SeatReservationResultDto;
 import com.mb.service.IScreeningService;
-import com.mb.service.SeatService;
+import com.mb.service.ISeatService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import java.util.List;
 public class CinemaResource {
 
 	private final IScreeningService screeningService;
-	private final SeatService seatService;
+	private final ISeatService seatService;
 	
 	@GetMapping("/")
 	public String index() {
@@ -30,12 +31,12 @@ public class CinemaResource {
 	}
 	
 	@GetMapping(value = "/{screening_id}/seats")
-	public ResponseEntity<AvailableSeatsForScreening> getSeatsForScreening(@PathVariable("screening_id") final String screeningId){
+	public ResponseEntity<ScreeningSeats> getSeatsForScreening(@PathVariable("screening_id") final String screeningId){
 		return ResponseEntity.ok(seatService.getSeats(screeningId));
 	}
 	
 	@PostMapping(value = "/{screening_id}/{seat}")
-	public ResponseEntity<String> bookSeat(@PathVariable("screening_id") final String screeningId, @RequestBody final ReserveDto reservation){
+	public ResponseEntity<SeatReservationResultDto> bookSeat(@PathVariable("screening_id") final String screeningId, @RequestBody final ReserveDto reservation){
 		return ResponseEntity.ok(seatService.bookSeat(screeningId, reservation));
 	}
 }

@@ -9,7 +9,9 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class ReserveDto {
     @NotBlank
-    private String seat;
+    private String row;
+    @NotBlank
+    private String num;
     @NotBlank
     private String username;
 }

@@ -6,7 +6,10 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "SCREENING", 
@@ -38,9 +41,31 @@ public class Screening {
 
 	@NotNull
 	@OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
-	private Set<Reservation> reservations;
+	private final Set<Reservation> reservations = new HashSet<>();
 
 	@NotNull
 	@OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
-	private Set<SeatReserved> seatsReserved;
+	private final Set<SeatReserved> seatsReserved = new HashSet<>();
+
+	public Set<Reservation> getReservations() {
+		return Collections.unmodifiableSet(reservations);
+	}
+
+	public Set<Seat> getSeats() {
+		return Collections.unmodifiableSet(auditorium.getSeats());
+	}
+
+	public Set<Seat> getReservedSeats() {
+		return seatsReserved.stream()
+				.map(SeatReserved::getSeat)
+				.collect(Collectors.toSet());
+	}
+
+	public boolean addSeatReserved(final SeatReserved seatReserved) {
+		return seatsReserved.add(seatReserved);
+	}
+
+	public boolean addReservations(final Reservation reservation) {
+		return reservations.add(reservation);
+	}
 }

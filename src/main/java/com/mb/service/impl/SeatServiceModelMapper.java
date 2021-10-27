@@ -1,8 +1,10 @@
 package com.mb.service.impl;
 
-import com.mb.dto.AvailableSeatsForScreening;
+import com.mb.converter.modelmapper.ModelMapperConverter;
 import com.mb.dto.ReserveDto;
+import com.mb.dto.ScreeningSeats;
 import com.mb.dto.SeatDto;
+import com.mb.dto.SeatReservationResultDto;
 import com.mb.models.Reservation;
 import com.mb.models.Screening;
 import com.mb.models.Seat;
@@ -10,50 +12,57 @@ import com.mb.models.SeatReserved;
 import com.mb.repository.ReservationRepository;
 import com.mb.repository.ScreeningRepository;
 import com.mb.repository.SeatReservedRepository;
-import com.mb.service.SeatService;
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
+import com.mb.service.ISeatService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
-public class SeatServiceImpl implements SeatService {
+public class SeatServiceModelMapper implements ISeatService {
 
 	private final ScreeningRepository screeningRepo;
 	private final ReservationRepository reservationRepo;
 	private final SeatReservedRepository seatReservedRepo;
+	private final ModelMapperConverter converter;
+
+	public SeatServiceModelMapper(final ScreeningRepository screeningRepo, final ReservationRepository reservationRepo,
+								  final SeatReservedRepository seatReservedRepo, @Qualifier("seatModelMapperConverter") final ModelMapperConverter converter) {
+		this.screeningRepo = screeningRepo;
+		this.reservationRepo = reservationRepo;
+		this.seatReservedRepo = seatReservedRepo;
+		this.converter = converter;
+	}
 
 	@Override
-	public AvailableSeatsForScreening getSeats(final String screeningId) {
+	@Transactional(readOnly = true)
+	public ScreeningSeats getSeats(final String screeningId) {
 		final Screening screening = screeningRepo.findById(screeningId)
 				.orElseThrow(NotFoundException::new);
 
-		ModelMapper mapper = new ModelMapper();
-		Type listType = new TypeToken<List<SeatDto>>() {}.getType();
-		List<SeatDto> seats = mapper.map(new ArrayList<>(getAvailableSeats(screening)), listType);
-
-		return new AvailableSeatsForScreening(screeningId, seats);
+		final Set<Seat> reservedSeats = screening.getReservedSeats();
+		final Set<SeatDto> seats = screening.getSeats()
+				.stream()
+				.map(seat -> {
+					final SeatDto seatDto = converter.toDto(seat, SeatDto.class);
+					seatDto.setReserved(reservedSeats.contains(seat));
+					return seatDto;
+				})
+				.collect(Collectors.toSet());
+		return new ScreeningSeats(screeningId, seats);
 	}
 
 	@Override
 	@Transactional
-	public String bookSeat(final String screeningId, final ReserveDto reservation) {
+	public SeatReservationResultDto bookSeat(final String screeningId, final ReserveDto reservation) {
 		final Screening screening = screeningRepo.findById(screeningId)
 				.orElseThrow(NotFoundException::new);
 
-		Set<Seat> availableSeats = getAvailableSeats(screening);
-
-		if(isSeatAvailable(availableSeats, reservation.getSeat())){
+		final Seat seatForReservation = getSeatForReservation(screening, reservation);
+		if (!screening.getReservedSeats().contains(seatForReservation)) {
 			final Reservation res = Reservation.builder()
 					.reserved(true)
 					.username(reservation.getUsername())
@@ -65,35 +74,32 @@ public class SeatServiceImpl implements SeatService {
 			final SeatReserved sres = SeatReserved.builder()
 					.reservation(res)
 					.screening(screening)
-					.seat(getSeat(availableSeats, reservation.getSeat()).get())
+					.seat(seatForReservation)
 					.build();
 
 			seatReservedRepo.save(sres);
 
-			return "Seat reserved successfully";
+			screening.addSeatReserved(sres);
+			seatForReservation.addSeatReserved(sres);
+
+			return SeatReservationResultDto.builder()
+					.screeningId(screeningId)
+					.success(true)
+					.message("Seat reserved successfully")
+					.build();
 		}
 
-		return "Seat already reserved";
+		return SeatReservationResultDto.builder()
+				.screeningId(screeningId)
+				.success(false)
+				.message("Seat already reserved")
+				.build();
 	}
 
-	private boolean isSeatAvailable(Set<Seat> availableSeats, String seat){
-		return getSeat(availableSeats, seat).isPresent();
-	}
-	
-	private Optional<Seat> getSeat(Set<Seat> availableSeats, String seat) {
-		String row = seat.substring(0, 1);
-		String num = seat.substring(1);
-		
-		return availableSeats.stream().filter(p -> p.getNum().equals(num) && p.getRow().equalsIgnoreCase(row)).findAny();
-	}
-
-	private Set<Seat> getAvailableSeats(Screening screening) {
-		Set<Seat> reserved = screening.getSeatsReserved().stream().map(SeatReserved::getSeat)
-				.collect(Collectors.toSet());
-
-		Set<Seat> availableSeats = screening.getAuditorium().getSeats();
-		availableSeats.removeAll(reserved);
-		
-		return availableSeats;
+	private Seat getSeatForReservation(final Screening screening, final ReserveDto reservation) {
+		return screening.getSeats().stream()
+				.filter(seat -> seat.getRow().equalsIgnoreCase(reservation.getRow()) && seat.getNum().equalsIgnoreCase(reservation.getNum()))
+				.findAny()
+				.orElseThrow(NotFoundException::new);
 	}
 }

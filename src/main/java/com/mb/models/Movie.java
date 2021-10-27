@@ -9,6 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -41,6 +43,13 @@ public class Movie {
 
 	@NotNull
 	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-	private Set<Screening> screenings;
+	private final Set<Screening> screenings = new HashSet<>();
 
+	public Set<Screening> getScreenings() {
+		return Collections.unmodifiableSet(screenings);
+	}
+
+	public boolean addScreening(final Screening screening) {
+		return screenings.add(screening);
+	}
 }

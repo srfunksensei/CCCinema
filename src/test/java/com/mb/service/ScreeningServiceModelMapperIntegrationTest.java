@@ -4,19 +4,13 @@ import com.mb.dto.ScreeningDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.List;
 
-@SpringBootTest
-@ActiveProfiles("test")
-@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:testdata.sql")
-public class ScreeningServiceModelMapperIntegrationTest {
+public class ScreeningServiceModelMapperIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     private IScreeningService underTest;

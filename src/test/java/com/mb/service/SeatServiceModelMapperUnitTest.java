@@ -3,7 +3,7 @@ package com.mb.service;
 import com.mb.converter.modelmapper.ModelMapperConverter;
 import com.mb.converter.modelmapper.SeatModelMapperConverter;
 import com.mb.dto.ReserveDto;
-import com.mb.dto.ScreeningSeats;
+import com.mb.dto.ScreeningSeatsDto;
 import com.mb.dto.SeatDto;
 import com.mb.dto.SeatReservationResultDto;
 import com.mb.models.*;
@@ -60,7 +60,7 @@ public class SeatServiceModelMapperUnitTest {
             Mockito.when(seatModelMapperConverter.toDto(eq(seat), eq(SeatDto.class))).thenReturn(seatDto);
         }
 
-        final ScreeningSeats result = underTest.getSeats(screening.getId());
+        final ScreeningSeatsDto result = underTest.getSeats(screening.getId());
         Assertions.assertNotNull(result, "Expected result");
         Assertions.assertFalse(result.getSeats().isEmpty(), "Expected seats");
         Assertions.assertEquals(screening.getId(), result.getScreeningId(), "Expected different screening id");

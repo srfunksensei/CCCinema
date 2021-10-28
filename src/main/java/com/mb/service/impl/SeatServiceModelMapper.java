@@ -2,7 +2,7 @@ package com.mb.service.impl;
 
 import com.mb.converter.modelmapper.ModelMapperConverter;
 import com.mb.dto.ReserveDto;
-import com.mb.dto.ScreeningSeats;
+import com.mb.dto.ScreeningSeatsDto;
 import com.mb.dto.SeatDto;
 import com.mb.dto.SeatReservationResultDto;
 import com.mb.models.Reservation;
@@ -39,7 +39,7 @@ public class SeatServiceModelMapper implements ISeatService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ScreeningSeats getSeats(final String screeningId) {
+	public ScreeningSeatsDto getSeats(final String screeningId) {
 		final Screening screening = screeningRepo.findById(screeningId)
 				.orElseThrow(NotFoundException::new);
 
@@ -52,7 +52,7 @@ public class SeatServiceModelMapper implements ISeatService {
 					return seatDto;
 				})
 				.collect(Collectors.toSet());
-		return new ScreeningSeats(screeningId, seats);
+		return new ScreeningSeatsDto(screeningId, seats);
 	}
 
 	@Override

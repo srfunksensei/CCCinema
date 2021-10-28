@@ -1,9 +1,6 @@
 package com.mb.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -11,7 +8,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ScreeningSeats {
+@Builder
+public class ScreeningSeatsDto {
 	
 	private String screeningId;
 	private Set<SeatDto> seats;

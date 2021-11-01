@@ -1,4 +1,4 @@
-package com.mb.service;
+package com.mb.service.modelmapper;
 
 import com.mb.converter.modelmapper.ModelMapperConverter;
 import com.mb.converter.modelmapper.SeatModelMapperConverter;
@@ -10,7 +10,8 @@ import com.mb.models.*;
 import com.mb.repository.ReservationRepository;
 import com.mb.repository.ScreeningRepository;
 import com.mb.repository.SeatReservedRepository;
-import com.mb.service.impl.SeatServiceModelMapper;
+import com.mb.service.ISeatService;
+import com.mb.service.impl.modelmapper.SeatServiceModelMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

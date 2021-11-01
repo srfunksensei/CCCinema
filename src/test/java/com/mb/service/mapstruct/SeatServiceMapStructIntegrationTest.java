@@ -1,4 +1,4 @@
-package com.mb.service;
+package com.mb.service.mapstruct;
 
 import com.mb.dto.ReserveDto;
 import com.mb.dto.ScreeningSeatsDto;
@@ -7,18 +7,22 @@ import com.mb.dto.SeatReservationResultDto;
 import com.mb.models.Screening;
 import com.mb.models.Seat;
 import com.mb.repository.ScreeningRepository;
+import com.mb.service.AbstractIntegrationTest;
+import com.mb.service.ISeatService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.Set;
 
-public class SeatServiceModelMapperIntegrationTest extends AbstractIntegrationTest {
+public class SeatServiceMapStructIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
+    @Qualifier("seatServiceMapStruct")
     private ISeatService underTest;
 
     @Autowired

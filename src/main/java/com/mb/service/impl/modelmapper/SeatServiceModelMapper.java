@@ -1,4 +1,4 @@
-package com.mb.service.impl;
+package com.mb.service.impl.modelmapper;
 
 import com.mb.converter.modelmapper.ModelMapperConverter;
 import com.mb.dto.ReserveDto;
@@ -21,7 +21,7 @@ import javax.ws.rs.NotFoundException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
+@Service("seatServiceModelMapper")
 public class SeatServiceModelMapper implements ISeatService {
 
 	private final ScreeningRepository screeningRepo;

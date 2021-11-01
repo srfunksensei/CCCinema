@@ -1,18 +1,22 @@
-package com.mb.service;
+package com.mb.service.mapstruct;
 
 import com.mb.dto.ScreeningDto;
+import com.mb.service.AbstractIntegrationTest;
+import com.mb.service.IScreeningService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.List;
 
-public class ScreeningServiceModelMapperIntegrationTest extends AbstractIntegrationTest {
+public class ScreeningServiceMapStructIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
+    @Qualifier("screeningServiceMapStruct")
     private IScreeningService underTest;
 
     @Test

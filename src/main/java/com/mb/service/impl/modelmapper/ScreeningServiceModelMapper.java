@@ -1,17 +1,16 @@
-package com.mb.service.impl;
+package com.mb.service.impl.modelmapper;
 
 import com.mb.converter.modelmapper.ModelMapperConverter;
 import com.mb.dto.ScreeningDto;
 import com.mb.repository.ScreeningRepository;
 import com.mb.service.IScreeningService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-@Service
+@Service("screeningServiceModelMapper")
 public class ScreeningServiceModelMapper implements IScreeningService {
 
 	private final ScreeningRepository screeningRepo;

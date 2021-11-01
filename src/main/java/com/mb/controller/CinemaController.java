@@ -6,7 +6,7 @@ import com.mb.dto.ScreeningSeatsDto;
 import com.mb.dto.SeatReservationResultDto;
 import com.mb.service.IScreeningService;
 import com.mb.service.ISeatService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +15,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/screening")
-@AllArgsConstructor
 public class CinemaController {
 
 	private final IScreeningService screeningService;
 	private final ISeatService seatService;
+
+	public CinemaController(@Qualifier("screeningServiceModelMapper") final IScreeningService screeningService,
+							@Qualifier("seatServiceModelMapper") final ISeatService seatService) {
+		this.screeningService = screeningService;
+		this.seatService = seatService;
+	}
 
 	@GetMapping("/upcoming")
 	public ResponseEntity<List<ScreeningDto>> getUpcomingMovies() {

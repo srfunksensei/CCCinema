@@ -1,10 +1,11 @@
-package com.mb.service;
+package com.mb.service.mapstruct;
 
-import com.mb.converter.modelmapper.ScreeningModelMapperConverter;
+import com.mb.converter.mapstruct.ScreeningMapStructConverter;
 import com.mb.dto.ScreeningDto;
 import com.mb.models.Screening;
 import com.mb.repository.ScreeningRepository;
-import com.mb.service.impl.ScreeningServiceModelMapper;
+import com.mb.service.IScreeningService;
+import com.mb.service.impl.mapstruct.ScreeningServiceMapStruct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,17 +18,16 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class ScreeningServiceModelMapperUnitTest {
+public class ScreeningServiceMapStructUnitTest {
 
     private IScreeningService underTest;
     private ScreeningRepository screeningRepository;
-    private ScreeningModelMapperConverter screeningModelMapperConverter;
 
     @BeforeEach
     public void setUp() {
         screeningRepository = Mockito.mock(ScreeningRepository.class);
-        screeningModelMapperConverter = Mockito.mock(ScreeningModelMapperConverter.class);
-        underTest = new ScreeningServiceModelMapper(screeningRepository, screeningModelMapperConverter);
+        final ScreeningMapStructConverter screeningMapStructConverter = Mockito.mock(ScreeningMapStructConverter.class);
+        underTest = new ScreeningServiceMapStruct(screeningRepository, screeningMapStructConverter);
     }
 
     @Test

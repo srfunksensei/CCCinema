@@ -2,7 +2,9 @@ package com.mb.converter.mapstruct;
 
 import com.mb.dto.ScreeningDto;
 import com.mb.models.Screening;
+import org.springframework.stereotype.Component;
 
+@Component(value = "screeningMapStructConverter")
 public class ScreeningMapStructConverter implements MapStructConverter<Screening, ScreeningDto> {
 
     @Override

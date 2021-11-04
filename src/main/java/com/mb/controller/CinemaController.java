@@ -20,8 +20,8 @@ public class CinemaController {
 	private final IScreeningService screeningService;
 	private final ISeatService seatService;
 
-	public CinemaController(@Qualifier("screeningServiceModelMapper") final IScreeningService screeningService,
-							@Qualifier("seatServiceModelMapper") final ISeatService seatService) {
+	public CinemaController(@Qualifier("screeningServiceMapStruct") final IScreeningService screeningService,
+							@Qualifier("seatServiceMapStruct") final ISeatService seatService) {
 		this.screeningService = screeningService;
 		this.seatService = seatService;
 	}

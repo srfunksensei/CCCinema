@@ -42,11 +42,11 @@ public class CinemaControllerUnitTest {
     protected ObjectMapper jsonMapper;
 
     @MockBean
-    @Qualifier("screeningServiceModelMapper")
+    @Qualifier("screeningServiceMapStruct")
     private IScreeningService screeningService;
 
     @MockBean
-    @Qualifier("seatServiceModelMapper")
+    @Qualifier("seatServiceMapStruct")
     private ISeatService seatService;
 
     @Test

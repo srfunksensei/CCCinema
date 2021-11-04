@@ -36,10 +36,10 @@ public class SeatServiceModelMapperIntegrationTest extends AbstractIntegrationTe
     @Test
     @Transactional
     public void getSeats() {
-        final List<Screening> screnings = screeningRepository.findAll();
-        Assertions.assertFalse(screnings.isEmpty(), "Expected to find some screenings");
+        final List<Screening> screenings = screeningRepository.findAll();
+        Assertions.assertFalse(screenings.isEmpty(), "Expected to find some screenings");
 
-        final Screening screening = screnings.get(0);
+        final Screening screening = screenings.get(0);
 
         final ScreeningSeatsDto result = underTest.getSeats(screening.getId());
         Assertions.assertNotNull(result, "Expected result");
@@ -63,10 +63,10 @@ public class SeatServiceModelMapperIntegrationTest extends AbstractIntegrationTe
     @Test
     @Transactional
     public void bookSeat_alreadyReserved() {
-        final List<Screening> screnings = screeningRepository.findAll();
-        Assertions.assertFalse(screnings.isEmpty(), "Expected to find some screenings");
+        final List<Screening> screenings = screeningRepository.findAll();
+        Assertions.assertFalse(screenings.isEmpty(), "Expected to find some screenings");
 
-        final Screening screening = screnings.get(0);
+        final Screening screening = screenings.get(0);
 
         final Set<Seat> seats = screening.getAuditorium().getSeats();
         Assertions.assertFalse(seats.isEmpty(), "Expected to find some seats in auditorium");
@@ -92,10 +92,10 @@ public class SeatServiceModelMapperIntegrationTest extends AbstractIntegrationTe
     @Test
     @Transactional
     public void bookSeat() {
-        final List<Screening> screnings = screeningRepository.findAll();
-        Assertions.assertFalse(screnings.isEmpty(), "Expected to find some screenings");
+        final List<Screening> screenings = screeningRepository.findAll();
+        Assertions.assertFalse(screenings.isEmpty(), "Expected to find some screenings");
 
-        final Screening screening = screnings.get(0);
+        final Screening screening = screenings.get(0);
 
         final Set<Seat> seats = screening.getAuditorium().getSeats();
         Assertions.assertFalse(seats.isEmpty(), "Expected to find some seats in auditorium");

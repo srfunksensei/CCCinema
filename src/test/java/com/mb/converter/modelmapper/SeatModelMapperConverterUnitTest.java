@@ -1,8 +1,8 @@
 package com.mb.converter.modelmapper;
 
 import com.mb.dto.SeatDto;
-import com.mb.models.Auditorium;
 import com.mb.models.Seat;
+import com.mb.provider.SeatProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class SeatModelMapperConverterUnitTest {
 
     @Test
     public void mapSeat() {
-        final Seat seat = buildSeat();
+        final Seat seat = SeatProvider.buildSeat();
 
         final SeatDto result = underTest.toDto(seat, SeatDto.class);
         Assertions.assertNotNull(result, "Expected result");
@@ -28,7 +28,7 @@ public class SeatModelMapperConverterUnitTest {
 
     @Test
     public void mapSeatList() {
-        final Seat seat = buildSeat();
+        final Seat seat = SeatProvider.buildSeat();
         final List<Seat> seats = Stream.of(seat).collect(Collectors.toList());
 
         final List<SeatDto> result = underTest.toDto(seats, SeatDto.class);
@@ -38,16 +38,5 @@ public class SeatModelMapperConverterUnitTest {
         Assertions.assertEquals(seat.getNum(), result.get(0).getNum(), "Expected different value");
         Assertions.assertEquals(seat.getRow(), result.get(0).getRow(), "Expected different value");
         Assertions.assertFalse(result.get(0).isReserved(), "Expected default value");
-    }
-
-    private Seat buildSeat() {
-        final Auditorium auditorium = Auditorium.builder()
-                .name("auditorium name")
-                .build();
-        return Seat.builder()
-                .row("row")
-                .num("num")
-                .auditorium(auditorium)
-                .build();
     }
 }

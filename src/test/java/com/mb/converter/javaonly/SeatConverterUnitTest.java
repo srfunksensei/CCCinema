@@ -1,8 +1,8 @@
 package com.mb.converter.javaonly;
 
 import com.mb.dto.SeatDto;
-import com.mb.models.Auditorium;
 import com.mb.models.Seat;
+import com.mb.provider.SeatProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class SeatConverterUnitTest {
 
     @Test
     public void mapSeat() {
-        final Seat seat = buildSeat();
+        final Seat seat = SeatProvider.buildSeat();
 
         final SeatDto result = underTest.convert(seat);
         Assertions.assertNotNull(result, "Expected result");
@@ -26,16 +26,5 @@ public class SeatConverterUnitTest {
     public void mapSeat_null() {
         final SeatDto result = underTest.convert(null);
         Assertions.assertNull(result, "Expected null");
-    }
-
-    private Seat buildSeat() {
-        final Auditorium auditorium = Auditorium.builder()
-                .name("auditorium name")
-                .build();
-        return Seat.builder()
-                .row("row")
-                .num("num")
-                .auditorium(auditorium)
-                .build();
     }
 }

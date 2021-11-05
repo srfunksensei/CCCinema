@@ -4,6 +4,7 @@ import com.mb.dto.ReserveDto;
 import com.mb.dto.ScreeningSeatsDto;
 import com.mb.dto.SeatDto;
 import com.mb.dto.SeatReservationResultDto;
+import com.mb.exception.ResourceNotFoundException;
 import com.mb.models.Screening;
 import com.mb.models.Seat;
 import com.mb.repository.ScreeningRepository;
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +30,7 @@ public class SeatServiceModelMapperIntegrationTest extends AbstractIntegrationTe
 
     @Test
     public void getSeats_noScreening() {
-        Assertions.assertThrows(NotFoundException.class, () -> underTest.getSeats("not-existing-screening-id"));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> underTest.getSeats("not-existing-screening-id"));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class SeatServiceModelMapperIntegrationTest extends AbstractIntegrationTe
                 .num("1")
                 .row("0")
                 .build();
-        Assertions.assertThrows(NotFoundException.class, () -> underTest.bookSeat("not-existing-screening-id", reservation));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> underTest.bookSeat("not-existing-screening-id", reservation));
     }
 
     @Test

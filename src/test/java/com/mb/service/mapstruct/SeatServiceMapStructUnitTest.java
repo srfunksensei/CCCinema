@@ -5,6 +5,7 @@ import com.mb.dto.ReserveDto;
 import com.mb.dto.ScreeningSeatsDto;
 import com.mb.dto.SeatDto;
 import com.mb.dto.SeatReservationResultDto;
+import com.mb.exception.ResourceNotFoundException;
 import com.mb.models.Reservation;
 import com.mb.models.Screening;
 import com.mb.models.Seat;
@@ -20,7 +21,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import javax.ws.rs.NotFoundException;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
@@ -42,7 +42,7 @@ public class SeatServiceMapStructUnitTest {
     public void getSeats_noScreening() {
         Mockito.when(screeningRepository.findById(anyString())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(NotFoundException.class, () -> underTest.getSeats("not-existing-screening-id"));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> underTest.getSeats("not-existing-screening-id"));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class SeatServiceMapStructUnitTest {
                 .num("1")
                 .row("0")
                 .build();
-        Assertions.assertThrows(NotFoundException.class, () -> underTest.bookSeat("not-existing-screening-id", reservation));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> underTest.bookSeat("not-existing-screening-id", reservation));
     }
 
     @Test

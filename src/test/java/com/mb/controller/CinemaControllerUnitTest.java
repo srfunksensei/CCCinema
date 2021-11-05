@@ -3,6 +3,7 @@ package com.mb.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mb.dto.*;
+import com.mb.exception.ResourceNotFoundException;
 import com.mb.service.IScreeningService;
 import com.mb.service.ISeatService;
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import javax.ws.rs.NotFoundException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +106,7 @@ public class CinemaControllerUnitTest {
     @Test
     public void getSeatsForScreening_nonExistingScreening() throws Exception {
         final String screeningId = "non-existing-screeningId";
-        Mockito.doThrow(new NotFoundException()).when(seatService).getSeats(eq(screeningId));
+        Mockito.doThrow(new ResourceNotFoundException()).when(seatService).getSeats(eq(screeningId));
 
         mockMvc.perform(
                 get("/api/screening/{screening_id}/seats", screeningId))

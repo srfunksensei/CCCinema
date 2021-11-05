@@ -5,6 +5,7 @@ import com.mb.dto.ReserveDto;
 import com.mb.dto.ScreeningSeatsDto;
 import com.mb.dto.SeatDto;
 import com.mb.dto.SeatReservationResultDto;
+import com.mb.exception.ResourceNotFoundException;
 import com.mb.models.Reservation;
 import com.mb.models.Screening;
 import com.mb.models.Seat;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.ws.rs.NotFoundException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,7 +41,7 @@ public class SeatServiceModelMapper implements ISeatService {
 	@Transactional(readOnly = true)
 	public ScreeningSeatsDto getSeats(final String screeningId) {
 		final Screening screening = screeningRepo.findById(screeningId)
-				.orElseThrow(NotFoundException::new);
+				.orElseThrow(ResourceNotFoundException::new);
 
 		final Set<Seat> reservedSeats = screening.getReservedSeats();
 		final Set<SeatDto> seats = screening.getSeats()
@@ -59,7 +59,7 @@ public class SeatServiceModelMapper implements ISeatService {
 	@Transactional
 	public SeatReservationResultDto bookSeat(final String screeningId, final ReserveDto reservation) {
 		final Screening screening = screeningRepo.findById(screeningId)
-				.orElseThrow(NotFoundException::new);
+				.orElseThrow(ResourceNotFoundException::new);
 
 		final Seat seatForReservation = getSeatForReservation(screening, reservation);
 		if (!screening.getReservedSeats().contains(seatForReservation)) {
@@ -100,6 +100,6 @@ public class SeatServiceModelMapper implements ISeatService {
 		return screening.getSeats().stream()
 				.filter(seat -> seat.getRow().equalsIgnoreCase(reservation.getRow()) && seat.getNum().equalsIgnoreCase(reservation.getNum()))
 				.findAny()
-				.orElseThrow(NotFoundException::new);
+				.orElseThrow(ResourceNotFoundException::new);
 	}
 }

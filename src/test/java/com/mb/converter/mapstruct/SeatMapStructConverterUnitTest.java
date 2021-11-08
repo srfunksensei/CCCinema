@@ -4,12 +4,14 @@ import com.mb.dto.SeatDto;
 import com.mb.models.Seat;
 import com.mb.provider.SeatProvider;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Tag("unit-test")
 public class SeatMapStructConverterUnitTest {
 
     private final MapStructConverter<Seat, SeatDto> underTest = new SeatMapStructConverter();

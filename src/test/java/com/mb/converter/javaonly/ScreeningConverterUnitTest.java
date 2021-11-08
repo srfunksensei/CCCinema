@@ -4,8 +4,10 @@ import com.mb.dto.ScreeningDto;
 import com.mb.models.Screening;
 import com.mb.provider.ScreeningProvider;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Tag("unit-test")
 public class ScreeningConverterUnitTest {
 
     private final ScreeningConverter underTest = new ScreeningConverter();

@@ -18,6 +18,7 @@ import com.mb.service.ISeatService;
 import com.mb.service.impl.mapstruct.SeatServiceMapStruct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -25,6 +26,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
 
+@Tag("unit-test")
 public class SeatServiceMapStructUnitTest {
 
     private final ScreeningRepository screeningRepository = Mockito.mock(ScreeningRepository.class);

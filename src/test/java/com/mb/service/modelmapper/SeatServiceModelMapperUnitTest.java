@@ -19,6 +19,7 @@ import com.mb.service.ISeatService;
 import com.mb.service.impl.modelmapper.SeatServiceModelMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -26,6 +27,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
 
+@Tag("unit-test")
 public class SeatServiceModelMapperUnitTest {
 
     private final ScreeningRepository screeningRepository = Mockito.mock(ScreeningRepository.class);

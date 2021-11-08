@@ -7,6 +7,7 @@ import com.mb.exception.ResourceNotFoundException;
 import com.mb.service.IScreeningService;
 import com.mb.service.ISeatService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Tag("unit-test")
 @WebMvcTest(controllers = CinemaController.class)
 public class CinemaControllerUnitTest {
 

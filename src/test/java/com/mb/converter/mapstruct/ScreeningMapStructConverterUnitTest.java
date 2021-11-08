@@ -4,12 +4,14 @@ import com.mb.dto.ScreeningDto;
 import com.mb.models.Screening;
 import com.mb.provider.ScreeningProvider;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Tag("unit-test")
 public class ScreeningMapStructConverterUnitTest {
 
     private final MapStructConverter<Screening, ScreeningDto> underTest = new ScreeningMapStructConverter();

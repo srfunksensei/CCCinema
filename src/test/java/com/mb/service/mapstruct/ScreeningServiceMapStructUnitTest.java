@@ -8,6 +8,7 @@ import com.mb.service.IScreeningService;
 import com.mb.service.impl.mapstruct.ScreeningServiceMapStruct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+@Tag("unit-test")
 public class ScreeningServiceMapStructUnitTest {
 
     private IScreeningService underTest;

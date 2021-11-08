@@ -4,6 +4,7 @@ import com.mb.dto.ScreeningDto;
 import com.mb.service.AbstractIntegrationTest;
 import com.mb.service.IScreeningService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.List;
 
+@Tag("integration-test")
 public class ScreeningServiceModelMapperIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired

@@ -20,8 +20,26 @@ Your project should include the following:
 ## Prerequisites
 
 1. Java
+2. Maven
 
 ## How to run application
+
+
+## How to run tests
+
+The tests have been split into two categories:
+- unit tests (fast, tests only a component mocks every dependency)
+- integration tests (slow, tests all components in integrations)
+
+This approach:
+- allows you to keep all tests in the same source directory `src/test/java`
+- is based on JUnit categories(4)/tags(5)
+
+In order to run test separately you can use the following command:
+
+We can also exclude some tests which can be done with: 
+
+    mvn test -DexcludedGroups="integration-test"
 
 
 ## License

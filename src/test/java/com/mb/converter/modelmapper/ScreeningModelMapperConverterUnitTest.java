@@ -21,13 +21,13 @@ public class ScreeningModelMapperConverterUnitTest {
         final Screening screening = ScreeningProvider.buildScreening();
 
         final ScreeningDto result = underTest.toDto(screening, ScreeningDto.class);
-        Assertions.assertEquals(screening.getAuditorium().getName(), result.getAuditorium(), "Expected different value");
+        Assertions.assertEquals(screening.getAuditorium().getTitle(), result.getAuditorium(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getTitle(), result.getTitle(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDescription(), result.getDescription(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDirector(), result.getDirector(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDuration(), result.getDuration(), "Expected different value");
         Assertions.assertEquals(screening.getId(), result.getScreeningId(), "Expected different value");
-        Assertions.assertEquals(screening.getStart(), result.getStart(), "Expected different value");
+        Assertions.assertEquals(screening.getStartingTime(), result.getStartingTime(), "Expected different value");
     }
 
     @Test
@@ -37,12 +37,12 @@ public class ScreeningModelMapperConverterUnitTest {
 
         final List<ScreeningDto> result = underTest.toDto(screenings, ScreeningDto.class);
         Assertions.assertEquals(1, result.size(), "Expected different value");
-        Assertions.assertEquals(screening.getAuditorium().getName(), result.get(0).getAuditorium(), "Expected different value");
+        Assertions.assertEquals(screening.getAuditorium().getTitle(), result.get(0).getAuditorium(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getTitle(), result.get(0).getTitle(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDescription(), result.get(0).getDescription(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDirector(), result.get(0).getDirector(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDuration(), result.get(0).getDuration(), "Expected different value");
         Assertions.assertEquals(screening.getId(), result.get(0).getScreeningId(), "Expected different value");
-        Assertions.assertEquals(screening.getStart(), result.get(0).getStart(), "Expected different value");
+        Assertions.assertEquals(screening.getStartingTime(), result.get(0).getStartingTime(), "Expected different value");
     }
 }

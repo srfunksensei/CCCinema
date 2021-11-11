@@ -22,7 +22,7 @@ public class SeatModelMapperConverterUnitTest {
 
         final SeatDto result = underTest.toDto(seat, SeatDto.class);
         Assertions.assertNotNull(result, "Expected result");
-        Assertions.assertEquals(seat.getAuditorium().getName(), result.getAuditorium(), "Expected different value");
+        Assertions.assertEquals(seat.getAuditorium().getTitle(), result.getAuditorium(), "Expected different value");
         Assertions.assertEquals(seat.getNum(), result.getNum(), "Expected different value");
         Assertions.assertEquals(seat.getRow(), result.getRow(), "Expected different value");
         Assertions.assertFalse(result.isReserved(), "Expected default value");
@@ -36,7 +36,7 @@ public class SeatModelMapperConverterUnitTest {
         final List<SeatDto> result = underTest.toDto(seats, SeatDto.class);
         Assertions.assertEquals(1, result.size(), "Expected different value");
         Assertions.assertNotNull(result, "Expected result");
-        Assertions.assertEquals(seat.getAuditorium().getName(), result.get(0).getAuditorium(), "Expected different value");
+        Assertions.assertEquals(seat.getAuditorium().getTitle(), result.get(0).getAuditorium(), "Expected different value");
         Assertions.assertEquals(seat.getNum(), result.get(0).getNum(), "Expected different value");
         Assertions.assertEquals(seat.getRow(), result.get(0).getRow(), "Expected different value");
         Assertions.assertFalse(result.get(0).isReserved(), "Expected default value");

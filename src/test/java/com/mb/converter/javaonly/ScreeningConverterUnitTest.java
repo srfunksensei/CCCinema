@@ -17,13 +17,13 @@ public class ScreeningConverterUnitTest {
         final Screening screening = ScreeningProvider.buildScreening();
 
         final ScreeningDto result = underTest.convert(screening);
-        Assertions.assertEquals(screening.getAuditorium().getName(), result.getAuditorium(), "Expected different value");
+        Assertions.assertEquals(screening.getAuditorium().getTitle(), result.getAuditorium(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getTitle(), result.getTitle(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDescription(), result.getDescription(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDirector(), result.getDirector(), "Expected different value");
         Assertions.assertEquals(screening.getMovie().getDuration(), result.getDuration(), "Expected different value");
         Assertions.assertEquals(screening.getId(), result.getScreeningId(), "Expected different value");
-        Assertions.assertEquals(screening.getStart(), result.getStart(), "Expected different value");
+        Assertions.assertEquals(screening.getStartingTime(), result.getStartingTime(), "Expected different value");
     }
 
     @Test

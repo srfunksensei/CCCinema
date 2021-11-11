@@ -7,7 +7,7 @@ public class SeatProvider {
 
     public static Seat buildSeat() {
         final Auditorium auditorium = Auditorium.builder()
-                .name("auditorium name")
+                .title("auditorium title")
                 .build();
         return Seat.builder()
                 .row("row")

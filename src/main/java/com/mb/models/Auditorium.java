@@ -28,7 +28,7 @@ public class Auditorium {
 	private String id;
 
 	@NotBlank
-	private String name;
+	private String title;
 	
 	private int seatsNum;
 

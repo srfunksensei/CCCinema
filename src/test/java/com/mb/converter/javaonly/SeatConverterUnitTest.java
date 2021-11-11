@@ -18,7 +18,7 @@ public class SeatConverterUnitTest {
 
         final SeatDto result = underTest.convert(seat);
         Assertions.assertNotNull(result, "Expected result");
-        Assertions.assertEquals(seat.getAuditorium().getName(), result.getAuditorium(), "Expected different value");
+        Assertions.assertEquals(seat.getAuditorium().getTitle(), result.getAuditorium(), "Expected different value");
         Assertions.assertEquals(seat.getNum(), result.getNum(), "Expected different value");
         Assertions.assertEquals(seat.getRow(), result.getRow(), "Expected different value");
         Assertions.assertFalse(result.isReserved(), "Expected default value");

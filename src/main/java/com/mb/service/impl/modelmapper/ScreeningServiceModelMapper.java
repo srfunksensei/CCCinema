@@ -23,6 +23,6 @@ public class ScreeningServiceModelMapper implements IScreeningService {
 
 	@Override
 	public List<ScreeningDto> getUpcoming(final Timestamp from) {
-		return converter.toDto(screeningRepo.findByStartAfter(from), ScreeningDto.class);
+		return converter.toDto(screeningRepo.findByStartingTimeAfter(from), ScreeningDto.class);
 	}
 }

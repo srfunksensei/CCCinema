@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ScreeningRepository extends JpaRepository<Screening, String> {
 
-	List<Screening> findByStartAfter(final Timestamp start);
+	List<Screening> findByStartingTimeAfter(final Timestamp start);
 }

@@ -17,5 +17,5 @@ public class ScreeningDto {
 	private int duration;
 	private String auditorium;
 	private String screeningId;
-	private Timestamp start;
+	private Timestamp startingTime;
 }

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "SCREENING", 
-		uniqueConstraints = @UniqueConstraint(columnNames = { "movie_id", "auditorium_id", "start" }))
+		uniqueConstraints = @UniqueConstraint(columnNames = { "movie_id", "auditorium_id", "starting_time" }))
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +27,8 @@ public class Screening {
 	private String id;
 
 	@Setter
-	private Timestamp start;
+	@Column(name = "starting_time")
+	private Timestamp startingTime;
 
 	@NotNull
 	@ManyToOne

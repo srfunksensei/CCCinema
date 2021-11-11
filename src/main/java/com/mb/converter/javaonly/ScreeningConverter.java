@@ -15,13 +15,13 @@ public class ScreeningConverter implements Converter<Screening, ScreeningDto> {
         }
 
         return ScreeningDto.builder()
-                .auditorium(source.getAuditorium().getName())
+                .auditorium(source.getAuditorium().getTitle())
                 .title(source.getMovie().getTitle())
                 .description(source.getMovie().getDescription())
                 .director(source.getMovie().getDirector())
                 .duration(source.getMovie().getDuration())
                 .screeningId(source.getId())
-                .start(source.getStart())
+                .startingTime(source.getStartingTime())
                 .build();
     }
 }

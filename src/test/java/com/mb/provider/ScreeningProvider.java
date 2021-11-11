@@ -16,16 +16,16 @@ public class ScreeningProvider {
         final Movie movie = Movie.builder()
                 .title("movie title")
                 .director("movie director")
-                .cast("movie cast")
+                .actors("movie cast")
                 .description("movie description")
                 .duration(120)
                 .build();
         final Auditorium auditorium = Auditorium.builder()
-                .name("auditorium name")
+                .title("auditorium title")
                 .build();
         return Screening.builder()
                 .id("default-id")
-                .start(Timestamp.valueOf(LocalDateTime.now()))
+                .startingTime(Timestamp.valueOf(LocalDateTime.now()))
                 .movie(movie)
                 .auditorium(auditorium)
                 .build();

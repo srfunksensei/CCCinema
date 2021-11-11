@@ -15,7 +15,7 @@ public class SeatConverter implements Converter<Seat, SeatDto> {
         }
 
         return SeatDto.builder()
-                .auditorium(source.getAuditorium().getName())
+                .auditorium(source.getAuditorium().getTitle())
                 .row(source.getRow())
                 .num(source.getNum())
                 .build();

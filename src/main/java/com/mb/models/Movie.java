@@ -34,7 +34,7 @@ public class Movie {
 	private String director;
 
 	@NotBlank
-	private String cast;
+	private String actors;
 
 	@NotBlank
 	private String description;

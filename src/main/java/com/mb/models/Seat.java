@@ -25,10 +25,11 @@ public class Seat {
 	private String id;
 
 	@NotBlank
-	@Column(name = "line")
+	@Column(name = "row_num")
 	private String row;
 
 	@NotBlank
+	@Column(name = "seat_num")
 	private String num;
 
 	@Setter

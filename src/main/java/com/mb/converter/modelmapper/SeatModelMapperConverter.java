@@ -11,7 +11,7 @@ public class SeatModelMapperConverter extends ModelMapperConverter {
 
     public static final PropertyMap<Seat, SeatDto> SEAT_MAP = new PropertyMap<Seat, SeatDto>() {
         protected void configure() {
-            map().setAuditorium(source.getAuditorium().getName());
+            map().setAuditorium(source.getAuditorium().getTitle());
             map().setNum(source.getNum());
             map().setRow(source.getRow());
             skip().setReserved(false);

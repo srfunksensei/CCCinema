@@ -11,7 +11,7 @@ public class ScreeningModelMapperConverter extends ModelMapperConverter {
 
     private static final PropertyMap<Screening, ScreeningDto> SCREENING_MAP = new PropertyMap<Screening, ScreeningDto>() {
         protected void configure() {
-            map().setAuditorium(source.getAuditorium().getName());
+            map().setAuditorium(source.getAuditorium().getTitle());
             map().setTitle(source.getMovie().getTitle());
             map().setDescription(source.getMovie().getDescription());
             map().setDirector(source.getMovie().getDirector());

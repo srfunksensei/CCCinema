@@ -76,7 +76,7 @@ public class CinemaControllerUnitTest {
                 .auditorium("auditorium")
                 .director("director")
                 .duration(120)
-                .start(new Timestamp(System.currentTimeMillis()))
+                .startingTime(new Timestamp(System.currentTimeMillis()))
                 .screeningId("screening-id")
                 .build();
         final List<ScreeningDto> toReturn = Stream.of(dto).collect(Collectors.toList());
@@ -101,7 +101,7 @@ public class CinemaControllerUnitTest {
         Assertions.assertEquals(dto.getDirector(), screeningDtoResult.getDirector(), "Expected different director");
         Assertions.assertEquals(dto.getDuration(), screeningDtoResult.getDuration(), "Expected different duration");
         Assertions.assertEquals(dto.getScreeningId(), screeningDtoResult.getScreeningId(), "Expected different screening id");
-        Assertions.assertEquals(dto.getStart(), screeningDtoResult.getStart(), "Expected different start time");
+        Assertions.assertEquals(dto.getStartingTime(), screeningDtoResult.getStartingTime(), "Expected different start time");
         Assertions.assertEquals(dto.getTitle(), screeningDtoResult.getTitle(), "Expected different title");
     }
 

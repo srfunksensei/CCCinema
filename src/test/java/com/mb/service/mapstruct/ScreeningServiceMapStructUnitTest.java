@@ -35,7 +35,7 @@ public class ScreeningServiceMapStructUnitTest {
     @Test
     public void getUpcoming() {
         final ArrayList<Screening> toReturn = new ArrayList<>();
-        when(screeningRepository.findByStartAfter(any(Timestamp.class))).thenReturn(toReturn);
+        when(screeningRepository.findByStartingTimeAfter(any(Timestamp.class))).thenReturn(toReturn);
 
         final List<ScreeningDto> result = underTest.getUpcoming(new Timestamp(System.currentTimeMillis()));
         Assertions.assertNotNull(result, "Expected result");

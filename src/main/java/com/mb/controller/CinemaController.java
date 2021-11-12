@@ -28,16 +28,16 @@ public class CinemaController {
 
 	@GetMapping("/upcoming")
 	public ResponseEntity<List<ScreeningDto>> getUpcomingMovies() {
-		return ResponseEntity.ok(screeningService.getUpcoming(new Timestamp(System.currentTimeMillis())));
+		return ResponseBuilder.ok(screeningService.getUpcoming(new Timestamp(System.currentTimeMillis())));
 	}
 	
 	@GetMapping("/{screening_id}/seats")
 	public ResponseEntity<ScreeningSeatsDto> getSeatsForScreening(@PathVariable("screening_id") final String screeningId){
-		return ResponseEntity.ok(seatService.getSeats(screeningId));
+		return ResponseBuilder.ok(seatService.getSeats(screeningId));
 	}
 	
 	@PostMapping("/{screening_id}/seats")
 	public ResponseEntity<SeatReservationResultDto> bookSeat(@PathVariable("screening_id") final String screeningId, @RequestBody final ReserveDto reservation){
-		return ResponseEntity.ok(seatService.bookSeat(screeningId, reservation));
+		return ResponseBuilder.ok(seatService.bookSeat(screeningId, reservation));
 	}
 }

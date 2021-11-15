@@ -1,5 +1,6 @@
 package com.mb.controller;
 
+import com.mb.api.version.APIPath;
 import com.mb.dto.ReserveDto;
 import com.mb.dto.ScreeningDto;
 import com.mb.dto.ScreeningSeatsDto;
@@ -14,14 +15,14 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/screening")
-public class CinemaController {
+@RequestMapping(value = APIPath.API + APIPath.VERSION_2 + APIPath.SCREENING)
+public class CinemaControllerV2 {
 
 	private final IScreeningService screeningService;
 	private final ISeatService seatService;
 
-	public CinemaController(@Qualifier("screeningServiceMapStruct") final IScreeningService screeningService,
-							@Qualifier("seatServiceMapStruct") final ISeatService seatService) {
+	public CinemaControllerV2(@Qualifier("screeningServiceMapStruct") final IScreeningService screeningService,
+							  @Qualifier("seatServiceMapStruct") final ISeatService seatService) {
 		this.screeningService = screeningService;
 		this.seatService = seatService;
 	}

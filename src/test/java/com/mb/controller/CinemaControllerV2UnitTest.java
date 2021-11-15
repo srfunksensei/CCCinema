@@ -2,6 +2,7 @@ package com.mb.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mb.api.version.APIPath;
 import com.mb.dto.*;
 import com.mb.exception.ResourceNotFoundException;
 import com.mb.service.IScreeningService;
@@ -34,8 +35,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Tag("unit-test")
-@WebMvcTest(controllers = CinemaController.class)
-public class CinemaControllerUnitTest {
+@WebMvcTest(controllers = CinemaControllerV2.class)
+public class CinemaControllerV2UnitTest {
+
+    private static final String ROOT_PATH_V2 = APIPath.API + APIPath.VERSION_2 + APIPath.SCREENING;
 
     @Autowired
     private MockMvc mockMvc;
@@ -56,7 +59,7 @@ public class CinemaControllerUnitTest {
         Mockito.when(screeningService.getUpcoming(any(Timestamp.class))).thenReturn(new ArrayList<>());
 
         final MvcResult mvcResult = mockMvc.perform(
-                get("/api/screening/upcoming"))
+                get(ROOT_PATH_V2 + "/upcoming"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
@@ -83,7 +86,7 @@ public class CinemaControllerUnitTest {
         Mockito.when(screeningService.getUpcoming(any(Timestamp.class))).thenReturn(toReturn);
 
         final MvcResult mvcResult = mockMvc.perform(
-                get("/api/screening/upcoming"))
+                get(ROOT_PATH_V2 + "/upcoming"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
@@ -111,7 +114,7 @@ public class CinemaControllerUnitTest {
         Mockito.doThrow(new ResourceNotFoundException()).when(seatService).getSeats(eq(screeningId));
 
         mockMvc.perform(
-                get("/api/screening/{screening_id}/seats", screeningId))
+                get(ROOT_PATH_V2 + "/{screening_id}/seats", screeningId))
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andReturn();
@@ -139,7 +142,7 @@ public class CinemaControllerUnitTest {
         Mockito.when(seatService.getSeats(eq(screeningId))).thenReturn(toReturn);
 
         final MvcResult mvcResult = mockMvc.perform(
-                get("/api/screening/{screening_id}/seats", screeningId))
+                get(ROOT_PATH_V2 + "/{screening_id}/seats", screeningId))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
@@ -177,7 +180,7 @@ public class CinemaControllerUnitTest {
         Mockito.when(seatService.bookSeat(eq(screeningId), eq(dto))).thenReturn(toReturn);
 
         final MvcResult mvcResult = mockMvc.perform(
-                post("/api/screening/{screening_id}/seats", screeningId)
+                post(ROOT_PATH_V2 + "/{screening_id}/seats", screeningId)
                         .content(jsonMapper.writeValueAsBytes(dto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())

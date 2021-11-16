@@ -2,19 +2,15 @@ package com.mb.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mb.api.version.APIPath;
 import com.mb.dto.*;
 import com.mb.exception.ResourceNotFoundException;
 import com.mb.service.IScreeningService;
 import com.mb.service.ISeatService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -34,37 +30,30 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Tag("unit-test")
-@WebMvcTest(controllers = CinemaControllerV2.class)
-public class CinemaControllerV2UnitTest {
-
-    private static final String ROOT_PATH_V2 = APIPath.API + APIPath.VERSION_2 + APIPath.SCREENING;
+@WebMvcTest
+public abstract class CinemaControllerUnitTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    protected MockMvc mockMvc;
 
     @Autowired
     protected ObjectMapper jsonMapper;
-
-    @MockBean
-    @Qualifier("screeningServiceMapStruct")
-    private IScreeningService screeningService;
-
-    @MockBean
-    @Qualifier("seatServiceMapStruct")
-    private ISeatService seatService;
+    
+    protected abstract String getRootPath();
+    protected abstract IScreeningService getScreeningService();
+    protected abstract ISeatService getSeatService();
 
     @Test
     public void getUpcomingMovies_noScreenings() throws Exception {
-        Mockito.when(screeningService.getUpcoming(any(Timestamp.class))).thenReturn(new ArrayList<>());
+        Mockito.when(getScreeningService().getUpcoming(any(Timestamp.class))).thenReturn(new ArrayList<>());
 
         final MvcResult mvcResult = mockMvc.perform(
-                get(ROOT_PATH_V2 + "/upcoming"))
+                get(getRootPath() + "/upcoming"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
 
-        Mockito.verify(screeningService, times(1)).getUpcoming(any(Timestamp.class));
+        Mockito.verify(getScreeningService(), times(1)).getUpcoming(any(Timestamp.class));
         final List<ScreeningDto> result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<List<ScreeningDto>>() {
         });
 
@@ -83,15 +72,15 @@ public class CinemaControllerV2UnitTest {
                 .screeningId("screening-id")
                 .build();
         final List<ScreeningDto> toReturn = Stream.of(dto).collect(Collectors.toList());
-        Mockito.when(screeningService.getUpcoming(any(Timestamp.class))).thenReturn(toReturn);
+        Mockito.when(getScreeningService().getUpcoming(any(Timestamp.class))).thenReturn(toReturn);
 
         final MvcResult mvcResult = mockMvc.perform(
-                get(ROOT_PATH_V2 + "/upcoming"))
+                get(getRootPath() + "/upcoming"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
 
-        Mockito.verify(screeningService, times(1)).getUpcoming(any(Timestamp.class));
+        Mockito.verify(getScreeningService(), times(1)).getUpcoming(any(Timestamp.class));
         final List<ScreeningDto> result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<List<ScreeningDto>>() {
         });
 
@@ -111,15 +100,15 @@ public class CinemaControllerV2UnitTest {
     @Test
     public void getSeatsForScreening_nonExistingScreening() throws Exception {
         final String screeningId = "non-existing-screeningId";
-        Mockito.doThrow(new ResourceNotFoundException()).when(seatService).getSeats(eq(screeningId));
+        Mockito.doThrow(new ResourceNotFoundException()).when(getSeatService()).getSeats(eq(screeningId));
 
         mockMvc.perform(
-                get(ROOT_PATH_V2 + "/{screening_id}/seats", screeningId))
+                get(getRootPath() + "/{screening_id}/seats", screeningId))
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andReturn();
 
-        Mockito.verify(seatService, times(1)).getSeats(eq(screeningId));
+        Mockito.verify(getSeatService(), times(1)).getSeats(eq(screeningId));
     }
 
 
@@ -139,15 +128,15 @@ public class CinemaControllerV2UnitTest {
                 .screeningId(screeningId)
                 .seats(seats)
                 .build();
-        Mockito.when(seatService.getSeats(eq(screeningId))).thenReturn(toReturn);
+        Mockito.when(getSeatService().getSeats(eq(screeningId))).thenReturn(toReturn);
 
         final MvcResult mvcResult = mockMvc.perform(
-                get(ROOT_PATH_V2 + "/{screening_id}/seats", screeningId))
+                get(getRootPath() + "/{screening_id}/seats", screeningId))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
 
-        Mockito.verify(seatService, times(1)).getSeats(eq(screeningId));
+        Mockito.verify(getSeatService(), times(1)).getSeats(eq(screeningId));
         final ScreeningSeatsDto result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<ScreeningSeatsDto>() {
         });
         Assertions.assertNotNull(result, "Expected result");
@@ -177,17 +166,17 @@ public class CinemaControllerV2UnitTest {
                 .success(true)
                 .message("message")
                 .build();
-        Mockito.when(seatService.bookSeat(eq(screeningId), eq(dto))).thenReturn(toReturn);
+        Mockito.when(getSeatService().bookSeat(eq(screeningId), eq(dto))).thenReturn(toReturn);
 
         final MvcResult mvcResult = mockMvc.perform(
-                post(ROOT_PATH_V2 + "/{screening_id}/seats", screeningId)
+                post(getRootPath() + "/{screening_id}/seats", screeningId)
                         .content(jsonMapper.writeValueAsBytes(dto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
 
-        Mockito.verify(seatService, times(1)).bookSeat(eq(screeningId), eq(dto));
+        Mockito.verify(getSeatService(), times(1)).bookSeat(eq(screeningId), eq(dto));
         final SeatReservationResultDto result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<SeatReservationResultDto>() {
         });
         Assertions.assertNotNull(result, "Expected result");

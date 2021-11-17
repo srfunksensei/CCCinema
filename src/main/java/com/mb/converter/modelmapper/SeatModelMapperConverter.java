@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "seatModelMapperConverter")
 public class SeatModelMapperConverter extends ModelMapperConverter {
 
-    public static final PropertyMap<Seat, SeatDto> SEAT_MAP = new PropertyMap<Seat, SeatDto>() {
+    public static final PropertyMap<Seat, SeatDto> SEAT_MAP = new PropertyMap<>() {
         protected void configure() {
             map().setAuditorium(source.getAuditorium().getTitle());
             map().setNum(source.getNum());

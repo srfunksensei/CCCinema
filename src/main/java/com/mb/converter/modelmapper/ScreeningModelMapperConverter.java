@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "screeningModelMapperConverter")
 public class ScreeningModelMapperConverter extends ModelMapperConverter {
 
-    private static final PropertyMap<Screening, ScreeningDto> SCREENING_MAP = new PropertyMap<Screening, ScreeningDto>() {
+    private static final PropertyMap<Screening, ScreeningDto> SCREENING_MAP = new PropertyMap<>() {
         protected void configure() {
             map().setAuditorium(source.getAuditorium().getTitle());
             map().setTitle(source.getMovie().getTitle());

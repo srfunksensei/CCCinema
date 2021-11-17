@@ -54,7 +54,7 @@ public abstract class CinemaControllerUnitTest {
                 .andReturn();
 
         Mockito.verify(getScreeningService(), times(1)).getUpcoming(any(Timestamp.class));
-        final List<ScreeningDto> result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<List<ScreeningDto>>() {
+        final List<ScreeningDto> result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<>() {
         });
 
         Assertions.assertTrue(result.isEmpty(), "Expected empty result");
@@ -81,7 +81,7 @@ public abstract class CinemaControllerUnitTest {
                 .andReturn();
 
         Mockito.verify(getScreeningService(), times(1)).getUpcoming(any(Timestamp.class));
-        final List<ScreeningDto> result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<List<ScreeningDto>>() {
+        final List<ScreeningDto> result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<>() {
         });
 
         Assertions.assertFalse(result.isEmpty(), "Expected empty result");
@@ -137,7 +137,7 @@ public abstract class CinemaControllerUnitTest {
                 .andReturn();
 
         Mockito.verify(getSeatService(), times(1)).getSeats(eq(screeningId));
-        final ScreeningSeatsDto result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<ScreeningSeatsDto>() {
+        final ScreeningSeatsDto result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<>() {
         });
         Assertions.assertNotNull(result, "Expected result");
         Assertions.assertEquals(screeningId, result.getScreeningId(), "Expected different screening id");
@@ -177,7 +177,7 @@ public abstract class CinemaControllerUnitTest {
                 .andReturn();
 
         Mockito.verify(getSeatService(), times(1)).bookSeat(eq(screeningId), eq(dto));
-        final SeatReservationResultDto result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<SeatReservationResultDto>() {
+        final SeatReservationResultDto result = jsonMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), new TypeReference<>() {
         });
         Assertions.assertNotNull(result, "Expected result");
         Assertions.assertEquals(screeningId, result.getScreeningId(), "Expected different screening id");

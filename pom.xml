@@ -5,7 +5,9 @@
 
 	<groupId>com.ccbill</groupId>
 	<artifactId>cinema</artifactId>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
+	<name>cccinema</name>
+	<description>Cinema purchase demo</description>
 
 	<properties>
 		<java.version>1.8</java.version>

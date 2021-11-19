@@ -19,13 +19,16 @@ Your project should include the following:
 
 ## Prerequisites
 
-1. Java
+1. Java 11 (or higher)
 2. Maven
 
-## How to run application
+### Building and Running
 
+```bash
+mvn clean spring-boot:run
+```
 
-## How to run tests
+## Testing
 
 The tests have been split into two categories:
 - unit tests (fast, tests only a component mocks every dependency)
@@ -33,14 +36,45 @@ The tests have been split into two categories:
 
 This approach:
 - allows you to keep all tests in the same source directory `src/test/java`
-- is based on JUnit categories(4)/tags(5)
+- is based on JUnit categories(v4)/tags(v5)
+
+Implementation can be done in two ways:
+
+##### without `maven-surefire-plugin` 
 
 In order to run test separately you can use the following command:
+```bash
+mvn clean test -Dgroups="unit-test"
+```
 
 We can also exclude some tests which can be done with: 
+```bash
+mvn test -DexcludedGroups="integration-test"
+```
 
-    mvn test -DexcludedGroups="integration-test"
+##### with `maven-surefire-plugin`
 
+Alternatively we can use `maven-surefire-plugin` and configure it to suit our needs. In this project it is configured to run all tests. In order to run them separately we can use the following commands:
+```bash
+mvn clean test -P unit-tests
+```
+or run them all with 
+```bash
+mvn clean verify
+```
+
+### Dockerizing app
+
+```bash
+mvn clean package
+docker build -t cccinema:latest .
+```
+
+running docker image
+
+```bash
+docker run -it -p 8080:8080 cccinema
+```
 
 ## License
 
